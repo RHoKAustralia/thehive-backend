@@ -1,0 +1,24 @@
+# Mac OS
+.DS_Store
+
+# Grails
+grailsw
+grailsw.bat
+*.log
+*.log.1
+
+# Maven
+target/
+log/
+
+# IntelliJ
+.idea/
+out/
+*.iws
+*.iml
+
+# STS/GGTS
+.classpath
+.project
+.settings/
+
