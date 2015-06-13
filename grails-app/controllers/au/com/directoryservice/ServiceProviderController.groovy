@@ -1,9 +1,6 @@
 package au.com.directoryservice
 
-import grails.converters.JSON
-import grails.rest.RestfulController
-
-class ServiceProviderController extends RestfulController<ServiceProvider> {
+class ServiceProviderController extends AbstractController<ServiceProvider> {
 
     static responseFormats = ['json', 'xml']
 
@@ -16,13 +13,10 @@ class ServiceProviderController extends RestfulController<ServiceProvider> {
     }
 
     def search() {
-
         List<ServiceProvider> serviceProviders = ServiceProvider.findAll(
                 "from ServiceProvider s where (s.name like :term or s.category.name like :term or :term in (s.category.keywords))",
                 [term: "%${params.q}%"])
 
         respond(serviceProviders)
-
-
     }
 }

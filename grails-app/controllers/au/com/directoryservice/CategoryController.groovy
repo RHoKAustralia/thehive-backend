@@ -1,8 +1,6 @@
 package au.com.directoryservice
 
-import grails.rest.RestfulController
-
-class CategoryController extends RestfulController<Category> {
+class CategoryController extends AbstractController<Category> {
 
     static responseFormats = ['json', 'xml']
 

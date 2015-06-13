@@ -25,27 +25,19 @@ class BootStrap {
             ]
         }
 
-        JSON.registerObjectMarshaller(Category) {
-            return [
-                    "id"      : it.id,
-                    "name"    : it.name,
-                    "iconPath": it.iconPath,
-                    "keywords": it.keywords
-            ]
-        }
-
         JSON.registerObjectMarshaller(Location) {
             return [
-                    "id"          : it.id,
-                    "name"        : it.name,
-                    "shopNumber"  : it.shopNumber,
-                    "streetNumber": it.streetNumber,
-                    "streetName"  : it.streetName,
-                    "suburb"      : it.suburb,
-                    "postcode"    : it.postcode,
-                    "latitude"    : it.latitude,
-                    "longitude"   : it.longitude,
-                    "website"     : it.website
+                    "id"              : it.id,
+                    "name"            : it.name,
+                    "shopNumber"      : it.shopNumber,
+                    "streetNumber"    : it.streetNumber,
+                    "streetName"      : it.streetName,
+                    "suburb"          : it.suburb,
+                    "postcode"        : it.postcode,
+                    "latitude"        : it.latitude,
+                    "longitude"       : it.longitude,
+                    "website"         : it.website,
+                    "hoursOfOperation": it.hoursOfOperation
             ]
         }
 
@@ -56,7 +48,18 @@ class BootStrap {
                     "category"   : it.category,
                     "description": it.description,
                     "imagePath"  : it.imagePath,
-                    "website"    : it.website
+                    "website"    : it.website,
+                    "locations"  : it.locations
+            ]
+        }
+
+
+        JSON.registerObjectMarshaller(Category) {
+            return [
+                    "id"      : it.id,
+                    "name"    : it.name,
+                    "iconPath": it.iconPath,
+                    "keywords": it.keywords
             ]
         }
 
