@@ -1,11 +1,9 @@
 package au.com.directoryservice
 
-import org.joda.time.DateTime
-
 abstract class Model {
 
-    DateTime dateCreated
-    DateTime lastUpdated
+    Date dateCreated = new Date()
+    Date lastUpdated = new Date()
     Boolean enabled = true
     App app
 }

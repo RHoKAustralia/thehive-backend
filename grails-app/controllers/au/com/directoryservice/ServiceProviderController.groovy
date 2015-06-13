@@ -17,18 +17,11 @@ class ServiceProviderController extends RestfulController<ServiceProvider> {
 
     def search() {
 
-        ServiceProvider.findAll("from ServiceProvider s where (s.name like :term or s.category.name like :term or :term in (s.category))")
+        List<ServiceProvider> serviceProviders = ServiceProvider.findAll(
+                "from ServiceProvider s where (s.name like :term or s.category.name like :term or :term in (s.category.keywords))",
+                [term: "%${params.q}%"])
 
-
-        String hql = "select s from Section s where s.deleted = false and s.module = :m"
-        def conditionalParams = [m: Module.get(params.m)]
-
-        if (params.q) {
-            hql += " and s.title like :q"
-            conditionalParams.put("q", "%${params.q}%")
-        }
-
-        respond(ServiceProvider.executeQuery(hql, conditionalParams, params))
+        respond(serviceProviders)
 
 
     }
