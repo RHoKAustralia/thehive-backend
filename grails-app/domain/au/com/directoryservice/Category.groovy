@@ -10,7 +10,7 @@ class Category extends Model {
         iconPath nullable: true
     }
 
-    static hasMany = ['keywords']
+    static hasMany = [keywords: String]
 
     static transients = ['services']
 
