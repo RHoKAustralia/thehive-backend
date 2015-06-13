@@ -34,8 +34,9 @@ class ServiceProviderController extends AbstractController<ServiceProvider> {
 
         // TODO make sure search is case insensitive (ilike)
         // TODO implement aroundme API (geo based)
-        // TODO implement "whatson today" api
+        // TODO implement "whatson today" api (steal code from roomservice)
 
+        // TODO make sure apis are all documented (index, show, bycateogry, search, whatson, and around me)
 
         respond(serviceProviders)
     }
