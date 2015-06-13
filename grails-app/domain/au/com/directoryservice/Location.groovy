@@ -23,6 +23,8 @@ class Location extends Model {
         website nullable: true
     }
 
+    static transients = ['hoursOfOperation']
+
     List<HoursOfOperation> getHoursOfOperation() {
         return HoursOfOperation.findAllByLocation(this)
     }

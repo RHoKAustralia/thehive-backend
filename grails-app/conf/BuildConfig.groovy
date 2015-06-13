@@ -73,7 +73,7 @@ grails.project.dependency.resolution = {
         compile ":build-test-data:2.4.0"
 
         compile ":joda-time:1.5"
-        compile ":spring-security-core:2.0-RC5"
+//        compile ":spring-security-core:2.0-RC5"
 
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.9.0"
