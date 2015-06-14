@@ -71,9 +71,14 @@ grails.project.dependency.resolution = {
         runtime ":jquery:1.11.1"
 
         compile ":build-test-data:2.4.0"
-
         compile ":joda-time:1.5"
+        compile ":twitter-bootstrap:3.3.4"
+        runtime ":cors:1.1.8"
+
 //        compile ":spring-security-core:2.0-RC5"
+//        runtime ':cors:1.1.8', {
+//            excludes 'spring-security-core', 'spring-security-web'
+//        }
 
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.9.0"

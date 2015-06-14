@@ -10,4 +10,21 @@
 *= require main
 *= require mobile
 *= require_self
+*= require bootstrap
 */
+
+.header {
+    background-color: lightskyblue;
+    margin-bottom: 0;
+}
+
+.page-title {
+    background-color: lightsteelblue;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.box {
+    background-color: lightsteelblue;
+    text-align: center;
+}

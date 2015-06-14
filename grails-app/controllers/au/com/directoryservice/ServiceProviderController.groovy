@@ -1,43 +1,71 @@
 package au.com.directoryservice
 
-import grails.converters.JSON
+import org.joda.time.DateTime
 
 class ServiceProviderController extends AbstractController<ServiceProvider> {
 
-    static responseFormats = ['json', 'xml']
+    static responseFormats = ['html', 'json', 'xml']
 
     ServiceProviderController() {
         super(ServiceProvider)
     }
 
     def bycategory() {
-        respond(Category.get(params.id)?.services)
+        List<ServiceProvider> serviceProviders = Category.get(params.id)?.services
+        respond serviceProviders, model: [("${resourceName}Count".toString()): serviceProviders.size(), ("${resourceName}List".toString()): serviceProviders]
     }
 
     def search() {
 
-        if(!params.q) {
+        if (!params.q) {
             respond([error: "Please provide 'q' term"])
             return
         }
 
         List<ServiceProvider> serviceProviders = ServiceProvider.findAll(
-                "from ServiceProvider s where (s.name like :term or s.category.name like :term)",
-                [term: "%${params.q}%"])
+                "from ServiceProvider s where (lower(s.name) like :term or lower(s.category.name) like :term)",
+                [term: "%${params.q}%".toLowerCase()])
 
+        Category.list().each { category ->
+            category.keywords.each { keyword ->
 
-        // TODO Implement search for each keyword in each cateogory
-        /*
-        I.e. category.each -> keyword.each -> if keyword ilike :term, then add.
-         Then list.unique
-         */
+                if (keyword.toLowerCase().contains(new String(params.q).toLowerCase())) {
 
-        // TODO make sure search is case insensitive (ilike)
-        // TODO implement aroundme API (geo based)
-        // TODO implement "whatson today" api (steal code from roomservice)
+                    category.services.each { service ->
 
-        // TODO make sure apis are all documented (index, show, bycateogry, search, whatson, and around me)
+                        if (!serviceProviders.contains(service)) {
+                            serviceProviders.add(service)
+                        }
+                    }
+                }
+            }
+        }
+
+        serviceProviders = serviceProviders.unique()
 
         respond(serviceProviders)
+
+        // TODO Back application with MySQL
+    }
+
+    def whatsontoday() {
+        Day today = Day.valueOf(DateTime.now().dayOfWeek().asText)
+
+        log.info(today)
+
+        List<ServiceProvider> serviceProviders = []
+
+        HoursOfOperation.list().each { hoursOfOperation ->
+
+            if (hoursOfOperation.days.contains(today)) {
+                serviceProviders.add(hoursOfOperation.location.serviceProvider)
+            }
+        }
+
+        respond(serviceProviders)
+    }
+
+    def aroundme() {
+        // TODO implement aroundme API (geo based)
     }
 }
