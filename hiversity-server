@@ -1,0 +1,25 @@
+#!/bin/bash
+
+if [ $USER != "root" ]; then
+        echo "Run with sudo, or as root"
+        exit 1
+fi
+
+if [ -z $1 ]; then
+        echo "Please specify an option (start/stop/status)"
+        exit 1
+fi
+
+if [ $1 == "start" ]; then
+        nohup java -jar standalone-0.1.jar port=80 &
+elif [ $1 == "stop" ]; then
+        ps -ef | grep sound-server
+        echo "Find the PID of the server from the above output and run 'sudo kill <pid>'"
+elif [ $1 == "status" ]; then
+        ps -ef | grep sound-server
+else
+        echo "Invalid command. Try one of these: start/stop/status"
+        exit 1
+fi
+
+exit 0
